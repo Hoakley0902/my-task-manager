@@ -6,6 +6,29 @@ const newTaskInput = document.getElementById("newTaskInput");
 
 const taskList = document.getElementById("taskList");
 
+
+function renderTasks() {
+    //clears the list empty before rendering the tasks again
+    taskList.innerHTML = "";
+    //renders each task as a list item
+    tasks.forEach(function(task, index) {
+        const newTask = document.createElement("li");
+        newTask.textContent = task.text;
+        taskList.appendChild(newTask);
+        console.log(task);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        newTask.appendChild(deleteBtn);
+        deleteBtn.addEventListener("click", function() {
+            tasks.splice(index, 1);
+            renderTasks();
+
+    });
+   
+});
+}
+
 //creates the array 
 const tasks = [];
 
@@ -28,16 +51,39 @@ const newTaskData ={
 //adds the new object to the array
 tasks.push(newTaskData);
 // prints the updated tasks array in the console
+renderTasks();
+
+for (let i = 0; i < tasks.length; i++) {
+    console.log(tasks[i].text);
+}
 console.log(tasks);
- 
-        
-//creates a new list item element and sets its text content to the value of the input
-const newTask = document.createElement("li");
-    newTask.textContent = newTaskInput.value;
-    taskList.appendChild(newTask);
+
     newTaskInput.value = "";
 
+});
+
+ const practiceTask = {
+    text: "Walk Dog", completed: false, 
+ }
+ showTask(practiceTask);
+
+
+function taskManagerLoaded() {
+    console.log('Task manager loaded');
+  }
+    taskManagerLoaded();
+
+function showTask(task){
+    console.log(task);
+}
+showTask("Walk dog");
+showTask("Study Javascript");
+
+function calculateCompletionPercentage(completed, total){
+    return (completed / total) * 100;
+   
 }
 
 
-);
+calculateCompletionPercentage(3,5);
+console.log(calculateCompletionPercentage(3,5));
