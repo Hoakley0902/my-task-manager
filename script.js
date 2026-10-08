@@ -14,6 +14,23 @@ function renderTasks() {
     tasks.forEach(function(task, index) {
         const newTask = document.createElement("li");
         newTask.textContent = task.text;
+
+            if (task.completed) {
+                newTask.style.textDecoration = "line-through";
+            }
+
+        // Create checkbox and set its type and checked state
+        const completeCheckBox = document.createElement("input");
+        completeCheckBox.type = "checkbox";
+        completeCheckBox.checked = task.completed;
+        newTask.appendChild(completeCheckBox);  
+    
+//updates data from checkbox
+completeCheckBox.addEventListener("change", function() {
+    task.completed = completeCheckBox.checked;
+    renderTasks();
+});
+
         taskList.appendChild(newTask);
         console.log(task);
 
@@ -87,3 +104,4 @@ function calculateCompletionPercentage(completed, total){
 
 calculateCompletionPercentage(3,5);
 console.log(calculateCompletionPercentage(3,5));
+
