@@ -6,14 +6,35 @@ const newTaskInput = document.getElementById("newTaskInput");
 
 const taskList = document.getElementById("taskList");
 
+const taskPriority = document.getElementById("taskPriority");
+
+const taskCategory = document.getElementById("taskCategory");
+
+const categoryFilter = document.getElementById("categoryFilter");
+
+categoryFilter.addEventListener("change", function() {
+    renderTasks();
+});
 
 function renderTasks() {
     //clears the list empty before rendering the tasks again
     taskList.innerHTML = "";
-    //renders each task as a list item
-    tasks.forEach(function(task, index) {
+
+    const selectedCategory = categoryFilter.value;
+
+const filteredTasks = tasks.filter(function(task) {
+    if (selectedCategory === "all") {
+        return true;
+    }
+
+    return task.category === selectedCategory;
+});
+
+    filteredTasks.forEach(function(task) {
+    const index = tasks.indexOf(task);
+    
         const newTask = document.createElement("li");
-        newTask.textContent = task.text;
+        newTask.textContent = task.text + " (Priority: " + task.priority + ", Category: " + task.category + ")";
 
             if (task.completed) {
                 newTask.style.textDecoration = "line-through";
@@ -33,6 +54,18 @@ completeCheckBox.addEventListener("change", function() {
 
         taskList.appendChild(newTask);
         console.log(task);
+
+        // create an option to change priority status
+        const prioritySelect = document.createElement("select");
+            prioritySelect.innerHTML = taskPriority.innerHTML;
+            prioritySelect.value = task.priority;
+            newTask.appendChild(prioritySelect);
+
+                 prioritySelect.addEventListener("change", function() {
+                // Save the dropdown's new value into this task's priority
+                task.priority = prioritySelect.value;
+                    renderTasks();
+    });
 
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
@@ -62,7 +95,9 @@ const tasks = [];
 //creates a new task object with the text from the input and a completed status of false
 const newTaskData ={
     text: newTaskInput.value,
-    completed: false
+    completed: false, 
+    priority: taskPriority.value,
+    category: taskCategory.value
 };
 
 //adds the new object to the array

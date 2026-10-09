@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3efff;
+    color: #302547;
+    margin: 0;
+    padding: 32px 16px;
+}
+
+main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(48, 37, 71, 0.12);
+}

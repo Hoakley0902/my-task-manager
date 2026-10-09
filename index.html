@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Task Manager</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
@@ -16,6 +16,20 @@
     
          <input 
          type="text" id="newTaskInput" placeholder="What needs to be done?">
+
+<label for="taskPriority">Priority:</label>
+    <select id="taskPriority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+
+<label for="taskCategory">Category:</label>
+    <select id="taskCategory">
+        <option value="personal">Personal</option>
+        <option value="work">Work</option>
+        <option value="learning">Learning</option>
+    </select>
 
 
 <button id="addTaskBtn" type="button">
@@ -29,8 +43,19 @@ Delete Task
     </section>
     <section> 
         <h2> My Tasks</h2>
+
+    <label for="categoryFilter">Show category:</label>
+        <select id="categoryFilter">
+            <option value="all">All</option>
+            <option value="personal">Personal</option>
+            <option value="work">Work</option>
+            <option value="learning">Learning</option>
+        </select>
+
+
         <ul id="taskList"></ul>
     </section>
+
         </div>
     
     </main>
