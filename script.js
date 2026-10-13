@@ -12,6 +12,8 @@ const taskCategory = document.getElementById("taskCategory");
 
 const categoryFilter = document.getElementById("categoryFilter");
 
+const taskDueDate = document.getElementById("taskDueDate");
+
 categoryFilter.addEventListener("change", function() {
     renderTasks();
 });
@@ -26,19 +28,48 @@ const filteredTasks = tasks.filter(function(task) {
     if (selectedCategory === "all") {
         return true;
     }
-
     return task.category === selectedCategory;
+});
+
+filteredTasks.sort(function(a, b) { 
+    if (a.dueDate === "" && b.dueDate === "") {
+        return 0;
+    }
+    if (a.dueDate === "") {
+        return 1;
+    }
+    if (b.dueDate === "") {
+        return -1;
+    }
+
+    const dateA = new Date (a.dueDate + "T00:00:00");
+    const dateB = new Date (b.dueDate + "T00:00:00");
+    
+    return dateA - dateB;
 });
 
     filteredTasks.forEach(function(task) {
     const index = tasks.indexOf(task);
-    
+
         const newTask = document.createElement("li");
         newTask.textContent = task.text + " (Priority: " + task.priority + ", Category: " + task.category + ")";
+
+        const today = new Date ();
+        today.setHours(0,0,0,0);
+
+        const dueDateDisplay = document.createElement("div");
+        dueDateDisplay.textContent = "Due Date: " + task.dueDate;
+        newTask.prepend(dueDateDisplay);
 
             if (task.completed) {
                 newTask.style.textDecoration = "line-through";
             }
+        
+        const dueDate = new Date(task.dueDate + "T00:00:00");
+            if (task.dueDate !== "" && dueDate < today && task.completed === false) {
+                dueDateDisplay.textContent = "Due " + task.dueDate + " - Overdue";
+            }
+
 
         // Create checkbox and set its type and checked state
         const completeCheckBox = document.createElement("input");
@@ -97,7 +128,8 @@ const newTaskData ={
     text: newTaskInput.value,
     completed: false, 
     priority: taskPriority.value,
-    category: taskCategory.value
+    category: taskCategory.value,
+    dueDate: taskDueDate.value
 };
 
 //adds the new object to the array
