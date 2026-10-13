@@ -31,6 +31,7 @@ const filteredTasks = tasks.filter(function(task) {
     return task.category === selectedCategory;
 });
 
+//sort due dates 
 filteredTasks.sort(function(a, b) { 
     if (a.dueDate === "" && b.dueDate === "") {
         return 0;
@@ -80,6 +81,7 @@ filteredTasks.sort(function(a, b) {
 //updates data from checkbox
 completeCheckBox.addEventListener("change", function() {
     task.completed = completeCheckBox.checked;
+    saveTasks();
     renderTasks();
 });
 
@@ -95,6 +97,7 @@ completeCheckBox.addEventListener("change", function() {
                  prioritySelect.addEventListener("change", function() {
                 // Save the dropdown's new value into this task's priority
                 task.priority = prioritySelect.value;
+                    saveTasks();
                     renderTasks();
     });
 
@@ -103,6 +106,7 @@ completeCheckBox.addEventListener("change", function() {
         newTask.appendChild(deleteBtn);
         deleteBtn.addEventListener("click", function() {
             tasks.splice(index, 1);
+            saveTasks();
             renderTasks();
 
     });
@@ -111,7 +115,19 @@ completeCheckBox.addEventListener("change", function() {
 }
 
 //creates the array 
-const tasks = [];
+let tasks = [];
+
+const savedTasks = localStorage.getItem("tasks");
+
+if (savedTasks !== null) {
+    tasks = JSON.parse(savedTasks);
+}
+
+renderTasks();
+
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
 //Runs the function when Add Task Button is clicked
     addTaskBtn.addEventListener("click", function() {
@@ -135,6 +151,7 @@ const newTaskData ={
 //adds the new object to the array
 tasks.push(newTaskData);
 // prints the updated tasks array in the console
+saveTasks();
 renderTasks();
 
 for (let i = 0; i < tasks.length; i++) {
