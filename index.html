@@ -13,8 +13,23 @@
         <p> Stay Organized, one task at a time</p>
     <section>
          <h2> Add a new task</h2>   
-    
-         <input 
+        
+         <p>Total Tasks: <span id="totalTaskDisplay">0</span></p>
+         <p>Tasks shown: <span id="tasksShownDisplay">0</span></p>
+         <p>Completed tasks: <span id="completedTasksDisplay">0</span></p>
+        <p> Remaining Tasks: <span id="remainingTasksDisplay">0</span></p>
+        <p> Overdue Tasks: <span id="overdueTasksDisplay">0</span></p>
+
+
+
+        
+        <p> 
+            <label for= "completionProgress">Completion: </label>
+            <span id="completionPercentageDisplay">0%</span>
+        </p>
+        <progress id="completionProgress" value="0" max="100"></progress>
+        
+        <input 
          type="text" id="newTaskInput" placeholder="What needs to be done?">
 
 <label for="taskPriority">Priority:</label>

@@ -14,6 +14,23 @@ const categoryFilter = document.getElementById("categoryFilter");
 
 const taskDueDate = document.getElementById("taskDueDate");
 
+const totalTaskDisplay = document.getElementById("totalTaskDisplay");
+
+const tasksShownDisplay = document.getElementById("tasksShownDisplay");
+
+const completedTasksDisplay = document.getElementById("completedTasksDisplay");
+
+const remainingTasksDisplay = document.getElementById("remainingTasksDisplay");
+
+const completionPercentageDisplay = document.getElementById("completionPercentageDisplay");
+const completionProgress = document.getElementById("completionProgress");
+const overdueTasksDisplay = document.getElementById("overdueTasksDisplay");
+
+
+
+
+
+
 categoryFilter.addEventListener("change", function() {
     renderTasks();
 });
@@ -22,7 +39,11 @@ function renderTasks() {
     //clears the list empty before rendering the tasks again
     taskList.innerHTML = "";
 
-    const selectedCategory = categoryFilter.value;
+const today = new Date ();
+        today.setHours(0,0,0,0);
+
+
+const selectedCategory = categoryFilter.value;
 
 const filteredTasks = tasks.filter(function(task) {
     if (selectedCategory === "all") {
@@ -30,6 +51,29 @@ const filteredTasks = tasks.filter(function(task) {
     }
     return task.category === selectedCategory;
 });
+
+totalTaskDisplay.textContent = tasks.length;
+tasksShownDisplay.textContent = filteredTasks.length;
+
+const overdueTasks = tasks.filter(function(task) {
+    const dueDate = new Date(task.dueDate + "T00:00:00");
+    return dueDate < today && !task.completed;
+});
+
+overdueTasksDisplay.textContent = overdueTasks.length;
+
+
+const completedTasks = tasks.filter(function(task) {
+     return task.completed;
+ });
+ completedTasksDisplay.textContent = completedTasks.length;
+
+ remainingTasksDisplay.textContent = tasks.length - completedTasks.length;
+
+const percentage = calculateCompletionPercentage(completedTasks.length, tasks.length);
+
+completionPercentageDisplay.textContent = percentage + "%";
+completionProgress.value = percentage;
 
 //sort due dates 
 filteredTasks.sort(function(a, b) { 
@@ -55,9 +99,7 @@ filteredTasks.sort(function(a, b) {
         const newTask = document.createElement("li");
         newTask.textContent = task.text + " (Priority: " + task.priority + ", Category: " + task.category + ")";
 
-        const today = new Date ();
-        today.setHours(0,0,0,0);
-
+        
         const dueDateDisplay = document.createElement("div");
         dueDateDisplay.textContent = "Due Date: " + task.dueDate;
         newTask.prepend(dueDateDisplay);
@@ -180,12 +222,14 @@ function showTask(task){
 showTask("Walk dog");
 showTask("Study Javascript");
 
-function calculateCompletionPercentage(completed, total){
-    return (completed / total) * 100;
-   
+
+function calculateCompletionPercentage(completed, total) {
+    if (total === 0) {
+        return 0;
+    }
+
+    return Math.round((completed / total) * 100);
 }
 
-
-calculateCompletionPercentage(3,5);
 console.log(calculateCompletionPercentage(3,5));
 
