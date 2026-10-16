@@ -80,4 +80,4 @@ They do not sync between devices or browsers. Tasks created while running the ap
 
 ## Live Demo
 
-A live demo link will be added after deployment.
+[Open My Task Manager](https://haley-task-manager.netlify.app/)
