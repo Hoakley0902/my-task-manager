@@ -1,96 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Task Manager</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <main>
-        <div> 
-        <h1> My Task Manager</h1>
-        <p> Stay Organized, one task at a time</p>
-    <section class="task-overview">
-    <h2>Your progress</h2>
+      <div>
+        <h1>My Task Manager</h1>
+        <p>Stay Organized, one task at a time</p>
+        <section class="task-overview">
+          <h2>Your progress</h2>
 
-    <div class="stats-grid">
-        <p>Total Tasks: <span id="totalTaskDisplay">0</span></p>
-        <p>Tasks shown: <span id="tasksShownDisplay">0</span></p>
-        <p>Completed tasks: <span id="completedTasksDisplay">0</span></p>
-        <p>Remaining Tasks: <span id="remainingTasksDisplay">0</span></p>
-        <p>Overdue Tasks: <span id="overdueTasksDisplay">0</span></p>
-    </div>
+          <div class="stats-grid">
+            <p>Total Tasks: <span id="totalTaskDisplay">0</span></p>
+            <p>Tasks shown: <span id="tasksShownDisplay">0</span></p>
+            <p>Completed tasks: <span id="completedTasksDisplay">0</span></p>
+            <p>Remaining Tasks: <span id="remainingTasksDisplay">0</span></p>
+            <p>Overdue Tasks: <span id="overdueTasksDisplay">0</span></p>
+          </div>
 
-    <p>
-        <label for="completionProgress">Completion:</label>
-        <span id="completionPercentageDisplay">0%</span>
-    </p>
-    <progress id="completionProgress" value="0" max="100"></progress>
-</section>
+          <p>
+            <label for="completionProgress">Completion:</label>
+            <span id="completionPercentageDisplay">0%</span>
+          </p>
+          <progress id="completionProgress" value="0" max="100"></progress>
+        </section>
 
-<section>
-    <h2>Add a new task</h2>
+        <section>
+          <h2>Add a new task</h2>
 
-    <form id="taskForm">
-        <div class="form-grid">
-            <div class="form-field task-name-field">
+          <form id="taskForm">
+            <div class="form-grid">
+              <div class="form-field task-name-field">
                 <label for="newTaskInput">Task Name:</label>
                 <input
-                    type="text"
-                    id="newTaskInput"
-                    placeholder="What needs to be done?"
-                    required
-                >
-            </div>
+                  type="text"
+                  id="newTaskInput"
+                  placeholder="What needs to be done?"
+                  required
+                />
+              </div>
 
-            <div class="form-field">
+              <div class="form-field">
                 <label for="taskPriority">Priority:</label>
                 <select id="taskPriority">
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
                 </select>
-            </div>
+              </div>
 
-            <div class="form-field">
+              <div class="form-field">
                 <label for="taskCategory">Category:</label>
                 <select id="taskCategory">
-                    <option value="personal">Personal</option>
-                    <option value="work">Work</option>
-                    <option value="learning">Learning</option>
+                  <option value="personal">Personal</option>
+                  <option value="work">Work</option>
+                  <option value="learning">Learning</option>
                 </select>
-            </div>
+              </div>
 
-            <div class="form-field">
+              <div class="form-field">
                 <label for="taskDueDate">Due Date:</label>
-                <input type="date" id="taskDueDate">
+                <input type="date" id="taskDueDate" />
+              </div>
             </div>
-        </div>
 
-        <button id="addTaskBtn" type="submit">Add Task</button>
-    </form>
-    </section>
-    
-    <section> 
-        <h2> My Tasks</h2>
+            <button id="addTaskBtn" type="submit">Add Task</button>
+          </form>
+        </section>
 
-    <label for="categoryFilter">Show category:</label>
-        <select id="categoryFilter">
+        <section>
+          <h2>My Tasks</h2>
+
+          <label for="categoryFilter">Show category:</label>
+          <select id="categoryFilter">
             <option value="all">All</option>
             <option value="personal">Personal</option>
             <option value="work">Work</option>
             <option value="learning">Learning</option>
-        </select>
+          </select>
 
-
-        <ul id="taskList"></ul>
-    </section>
-
-        </div>
-    
+          <ul id="taskList"></ul>
+        </section>
+      </div>
     </main>
 
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

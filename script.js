@@ -1,5 +1,4 @@
 const addTaskBtn = document.getElementById("addTaskBtn");
-console.log(addTaskBtn);
 
 const newTaskInput = document.getElementById("newTaskInput");
 
@@ -127,7 +126,7 @@ filteredTasks.sort(function(a, b) {
         completeCheckBox.type = "checkbox";
         completeCheckBox.setAttribute("aria-label", "Complete task: " + task.text);
         completeCheckBox.checked = task.completed;
-        completeCheckBox.id = "complete- " + index;
+        completeCheckBox.id = "complete-" + index;
         taskControls.appendChild(completeCheckBox);
             const completeLabel = document.createElement("label");
                     completeLabel.htmlFor = completeCheckBox.id;
@@ -146,7 +145,6 @@ completeCheckBox.addEventListener("change", function() {
 });
 
         taskList.appendChild(newTask);
-        console.log(task);
 
         // create an option to change priority status
         const prioritySelect = document.createElement("select");
@@ -200,11 +198,8 @@ function saveTasks() {
 //Runs the function when Add Task Button is clicked
 taskForm.addEventListener("submit", function(event) {
     event.preventDefault();
-    //print the text currently inside the input
-            console.log(newTaskInput.value);
-
                 if (newTaskInput.value === "") {
-                    console.log("Please enter a task.");
+                    
                     newTaskInput.focus();
                     return;
                     
@@ -221,35 +216,11 @@ const newTaskData ={
 
 //adds the new object to the array
 tasks.push(newTaskData);
-// prints the updated tasks array in the console
 saveTasks();
 renderTasks();
-
-for (let i = 0; i < tasks.length; i++) {
-    console.log(tasks[i].text);
-}
-console.log(tasks);
-
     newTaskInput.value = "";
 
 });
-
- const practiceTask = {
-    text: "Walk Dog", completed: false, 
- }
- showTask(practiceTask);
-
-
-function taskManagerLoaded() {
-    console.log('Task manager loaded');
-  }
-    taskManagerLoaded();
-
-function showTask(task){
-    console.log(task);
-}
-showTask("Walk dog");
-showTask("Study Javascript");
 
 
 function calculateCompletionPercentage(completed, total) {
@@ -259,6 +230,4 @@ function calculateCompletionPercentage(completed, total) {
 
     return Math.round((completed / total) * 100);
 }
-
-console.log(calculateCompletionPercentage(3,5));
 
