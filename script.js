@@ -26,7 +26,7 @@ const completionPercentageDisplay = document.getElementById("completionPercentag
 const completionProgress = document.getElementById("completionProgress");
 const overdueTasksDisplay = document.getElementById("overdueTasksDisplay");
 
-
+const taskForm = document.getElementById("taskForm");
 
 
 
@@ -97,15 +97,23 @@ filteredTasks.sort(function(a, b) {
     const index = tasks.indexOf(task);
 
         const newTask = document.createElement("li");
-        newTask.textContent = task.text + " (Priority: " + task.priority + ", Category: " + task.category + ")";
+        const taskText = document.createElement("span");
+            taskText.className = "task-text";
+            taskText.textContent = task.text + " (Priority: " + task.priority + ", Category: " + task.category + ")";
+            newTask.appendChild(taskText);
+    
+            const taskControls = document.createElement("div");
+                taskControls.className = "task-controls";
+                newTask.appendChild(taskControls);
 
-        
+
+
         const dueDateDisplay = document.createElement("div");
         dueDateDisplay.textContent = "Due Date: " + task.dueDate;
         newTask.prepend(dueDateDisplay);
 
             if (task.completed) {
-                newTask.style.textDecoration = "line-through";
+                taskText.style.textDecoration = "line-through";
             }
         
         const dueDate = new Date(task.dueDate + "T00:00:00");
@@ -117,9 +125,19 @@ filteredTasks.sort(function(a, b) {
         // Create checkbox and set its type and checked state
         const completeCheckBox = document.createElement("input");
         completeCheckBox.type = "checkbox";
+        completeCheckBox.setAttribute("aria-label", "Complete task: " + task.text);
         completeCheckBox.checked = task.completed;
-        newTask.appendChild(completeCheckBox);  
-    
+        completeCheckBox.id = "complete- " + index;
+        taskControls.appendChild(completeCheckBox);
+            const completeLabel = document.createElement("label");
+                    completeLabel.htmlFor = completeCheckBox.id;
+                    if (task.completed) {
+    completeLabel.textContent = "Completed";
+} else {
+    completeLabel.textContent = "";
+}
+                    taskControls.appendChild(completeLabel);
+
 //updates data from checkbox
 completeCheckBox.addEventListener("change", function() {
     task.completed = completeCheckBox.checked;
@@ -134,7 +152,15 @@ completeCheckBox.addEventListener("change", function() {
         const prioritySelect = document.createElement("select");
             prioritySelect.innerHTML = taskPriority.innerHTML;
             prioritySelect.value = task.priority;
-            newTask.appendChild(prioritySelect);
+            prioritySelect.id = "priority-" + index;
+
+        const priorityLabel = document.createElement("label");
+            priorityLabel.htmlFor = prioritySelect.id;
+            priorityLabel.textContent = "Priority: ";
+            taskControls.appendChild(priorityLabel);
+
+taskControls.appendChild(prioritySelect);
+            
 
                  prioritySelect.addEventListener("change", function() {
                 // Save the dropdown's new value into this task's priority
@@ -145,7 +171,7 @@ completeCheckBox.addEventListener("change", function() {
 
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
-        newTask.appendChild(deleteBtn);
+        taskControls.appendChild(deleteBtn);
         deleteBtn.addEventListener("click", function() {
             tasks.splice(index, 1);
             saveTasks();
@@ -172,13 +198,16 @@ function saveTasks() {
 }
 
 //Runs the function when Add Task Button is clicked
-    addTaskBtn.addEventListener("click", function() {
+taskForm.addEventListener("submit", function(event) {
+    event.preventDefault();
     //print the text currently inside the input
             console.log(newTaskInput.value);
 
                 if (newTaskInput.value === "") {
                     console.log("Please enter a task.");
+                    newTaskInput.focus();
                     return;
+                    
         }
 
 //creates a new task object with the text from the input and a completed status of false

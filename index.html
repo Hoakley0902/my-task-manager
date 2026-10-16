@@ -11,53 +11,67 @@
         <div> 
         <h1> My Task Manager</h1>
         <p> Stay Organized, one task at a time</p>
-    <section>
-         <h2> Add a new task</h2>   
-        
-         <p>Total Tasks: <span id="totalTaskDisplay">0</span></p>
-         <p>Tasks shown: <span id="tasksShownDisplay">0</span></p>
-         <p>Completed tasks: <span id="completedTasksDisplay">0</span></p>
-        <p> Remaining Tasks: <span id="remainingTasksDisplay">0</span></p>
-        <p> Overdue Tasks: <span id="overdueTasksDisplay">0</span></p>
+    <section class="task-overview">
+    <h2>Your progress</h2>
 
+    <div class="stats-grid">
+        <p>Total Tasks: <span id="totalTaskDisplay">0</span></p>
+        <p>Tasks shown: <span id="tasksShownDisplay">0</span></p>
+        <p>Completed tasks: <span id="completedTasksDisplay">0</span></p>
+        <p>Remaining Tasks: <span id="remainingTasksDisplay">0</span></p>
+        <p>Overdue Tasks: <span id="overdueTasksDisplay">0</span></p>
+    </div>
 
+    <p>
+        <label for="completionProgress">Completion:</label>
+        <span id="completionPercentageDisplay">0%</span>
+    </p>
+    <progress id="completionProgress" value="0" max="100"></progress>
+</section>
 
-        
-        <p> 
-            <label for= "completionProgress">Completion: </label>
-            <span id="completionPercentageDisplay">0%</span>
-        </p>
-        <progress id="completionProgress" value="0" max="100"></progress>
-        
-        <input 
-         type="text" id="newTaskInput" placeholder="What needs to be done?">
+<section>
+    <h2>Add a new task</h2>
 
-<label for="taskPriority">Priority:</label>
-    <select id="taskPriority">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-    </select>
+    <form id="taskForm">
+        <div class="form-grid">
+            <div class="form-field task-name-field">
+                <label for="newTaskInput">Task Name:</label>
+                <input
+                    type="text"
+                    id="newTaskInput"
+                    placeholder="What needs to be done?"
+                    required
+                >
+            </div>
 
-<label for="taskCategory">Category:</label>
-    <select id="taskCategory">
-        <option value="personal">Personal</option>
-        <option value="work">Work</option>
-        <option value="learning">Learning</option>
-    </select>
+            <div class="form-field">
+                <label for="taskPriority">Priority:</label>
+                <select id="taskPriority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
 
-<label for="taskDueDate">Due Date:</label>
-    <input type="date" id="taskDueDate">
+            <div class="form-field">
+                <label for="taskCategory">Category:</label>
+                <select id="taskCategory">
+                    <option value="personal">Personal</option>
+                    <option value="work">Work</option>
+                    <option value="learning">Learning</option>
+                </select>
+            </div>
 
-<button id="addTaskBtn" type="button">
-Add Task
-</button>
+            <div class="form-field">
+                <label for="taskDueDate">Due Date:</label>
+                <input type="date" id="taskDueDate">
+            </div>
+        </div>
 
-<button id="deleteTaskBtn" type="button">
-Delete Task
-</button>
-
+        <button id="addTaskBtn" type="submit">Add Task</button>
+    </form>
     </section>
+    
     <section> 
         <h2> My Tasks</h2>
 
